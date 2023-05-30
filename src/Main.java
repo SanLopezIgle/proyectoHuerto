@@ -4,7 +4,7 @@ import com.huerto.view.HuertoPersonalizadoIU;
 
 public class Main {
     public static void main(String[] args) {
-        
+
         HuertoIU huertoIU= new HuertoIU();
         huertoIU.setVisible(true);
 

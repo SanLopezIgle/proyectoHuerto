@@ -200,4 +200,23 @@ public class HuertoIU extends javax.swing.JFrame {
     public javax.swing.JTextField txtDniCliente;
     public javax.swing.JTextField txtNomCliente;
     // End of variables declaration//GEN-END:variables
+
+
+    /**
+     * Método que devuelve la referencia al boton bHuertoCatalogo
+     * @return botón de huerto del catálogo en la base de datos
+     */
+
+    public javax.swing.JButton getbHuertoCatalogo(){
+        return bHuertoCatalogo;
+    }
+
+    /**
+     * Método que devuelve la referencia al boton bHuertoPersonalizado
+     * @return botón de huerto personalizado en la base de datos
+     */
+
+    public javax.swing.JButton getbHuertoPersonalizado(){
+        return bHuertoPersonalizado;
+    }
 }
