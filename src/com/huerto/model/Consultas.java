@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Consultas {
     private DatabaseManager databaseManager;
@@ -34,9 +35,9 @@ public class Consultas {
     }
 
     /**
-     *
+     * @return
      */
-    public void mostrarTablaHuertos(){
+    public ArrayList<String[]> mostrarTablaHuertos(){
         Connection conexion = databaseManager.getConnection();
         try{
             String consulta = "SELECT h.idHuerto, p.especie FROM huerto h INNER JOIN planta p ON h.planta_id = p.idPlanta";
@@ -57,6 +58,7 @@ public class Consultas {
         }finally {
             cerrarConexion();
         }
+        return null;
     }
 
     /**
