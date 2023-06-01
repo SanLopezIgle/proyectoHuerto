@@ -1,4 +1,7 @@
+import com.huerto.controller.HuertoCatalogoController;
 import com.huerto.controller.HuertoController;
+import com.huerto.model.Consultas;
+import com.huerto.model.DatabaseManager;
 import com.huerto.view.HuertoCatalogoIU;
 import com.huerto.view.HuertoIU;
 import com.huerto.view.HuertoPersonalizadoIU;
@@ -17,5 +20,14 @@ public class Main {
 
         HuertoController controller = new HuertoController(huertoIU, huertoCatalogoIU, huertoPersonalizadoIU);
         huertoIU.setVisible(true);
+
+        //HuertoCatalogoIU vistaCatalago = new HuertoCatalogoIU();
+        //vistaCatalago.setVisible(true);
+        DatabaseManager modelo = DatabaseManager.getInstance();
+
+        Consultas consulta = new Consultas();
+
+        HuertoCatalogoController controllerCatalogo = new HuertoCatalogoController(huertoCatalogoIU,consulta);
+
     }
 }
