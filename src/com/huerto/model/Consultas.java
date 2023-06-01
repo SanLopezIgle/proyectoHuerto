@@ -1,10 +1,9 @@
 package com.huerto.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class Consultas {
     private DatabaseManager databaseManager;
@@ -33,7 +32,7 @@ public class Consultas {
             cerrarConexion();
         }
     }
-
+    /*
     /**
      * @return
      */
@@ -41,7 +40,8 @@ public class Consultas {
         ArrayList<Huerto> datosHuerto = new ArrayList<>();
         Connection conexion = databaseManager.getConnection();
         try{
-            String consulta = "SELECT h.idHuerto, p.especie FROM huerto h INNER JOIN planta p ON h.planta_id = p.idPlanta";
+            //String consulta = "SELECT h.idHuerto, p.especie FROM huerto h INNER JOIN planta p ON h.planta_id = p.idPlanta";
+            String consulta = "select idHuerto, planta_id from huerto";
             PreparedStatement st = conexion.prepareStatement(consulta);
             ResultSet resultado = st.executeQuery();
 
@@ -63,9 +63,10 @@ public class Consultas {
 
     /**
      *
-     * @param idHuerto
-     * @param idPlanta
+     * @param //idHuerto
+     * @param //idPlanta
      */
+    /*
     public void insertarHuerto(int idHuerto, int idPlanta){
         Connection conexion = databaseManager.getConnection();
         try{
@@ -80,6 +81,37 @@ public class Consultas {
         }finally {
             cerrarConexion();
         }
+    }
+    */
+
+    public static ArrayList<Huerto> mostrarDatosHuerto(){
+        ArrayList<Huerto> huertos = new ArrayList<>();
+        String consulta = "select idHuerto, planta_id from huerto";
+        try{
+            Connection conexion = DatabaseManager.getInstance().getConnection();
+            Statement st = conexion.createStatement();
+            ResultSet resultSet = st.executeQuery(consulta);
+            /*
+            DefaultTableModel tableModel = new DefaultTableModel();
+            tableModel.addColumn("ID HUERTO");
+            tableModel.addColumn("ID PLANTA");
+            */
+            while (resultSet.next()){
+                int idHuerto = resultSet.getInt("idhuerto");
+                int planta_id = resultSet.getInt("idplanta");
+                //tableModel.addRow(new Object[]{idHuerto, planta_id});
+                Huerto huerto = new Huerto(idHuerto, planta_id);
+                huertos.add(huerto);
+            }
+
+            //tabla.getModel();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return huertos;
+
     }
 
     /**

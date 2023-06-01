@@ -4,6 +4,8 @@ import com.huerto.model.Consultas;
 import com.huerto.model.DatabaseManager;
 import com.huerto.model.Huerto;
 import com.huerto.view.HuertoCatalogoIU;
+
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -11,7 +13,6 @@ import java.util.ArrayList;
 public class HuertoCatalogoController {
     private HuertoCatalogoIU vista;
     private Consultas consulta;
-
     private DatabaseManager modelo;
 
     public HuertoCatalogoController(HuertoCatalogoIU vista, Consultas consulta, DatabaseManager modelo) {
@@ -20,6 +21,9 @@ public class HuertoCatalogoController {
         this.modelo = modelo;
     }
 
+    public HuertoCatalogoController(HuertoCatalogoIU vista){
+        this.vista = vista;
+    }
     /**
      * Método que muestra en la tabla de la interfaz los datos de los huertos
      * que tenemos en la BD
@@ -35,12 +39,26 @@ public class HuertoCatalogoController {
         for (Huerto fila : datosHuerto){
              Object datos[] = new Object[2];
              datos[0] = fila.getIdHuerto();
-             datos[1] = fila.getPlantas();
+            // datos[1] = fila.getPlantas();
 
              modelo.addRow(datos);
         }
 
         vista.jTable1.setModel(modelo);
+    }
+
+    public void huertos(JTable tabla){
+        ArrayList<Huerto> huertos = Consultas.mostrarDatosHuerto();
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.addColumn("idhuerto");
+        tableModel.addColumn("idplanta");
+
+        for(Huerto huerto : huertos){
+            Object[] rowData = {huerto.getIdHuerto(), huerto.getPlanta_id()};
+            tableModel.addRow(rowData);
+        }
+
+        tabla.setModel(tableModel);
     }
 
     public void cargarTabla(){

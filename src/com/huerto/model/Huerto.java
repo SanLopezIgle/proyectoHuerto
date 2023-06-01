@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public class Huerto {
     // Atributos huerto
     private Integer idHuerto;
-    private ArrayList<Planta> plantas;
+    private Integer planta_id;
 
     // Constructores huerto
     public Huerto(){
 
     }
-    public Huerto(Integer idHuerto, ArrayList<Planta> plantas) {
+    public Huerto(Integer idHuerto, Integer planta_id) {
         this.idHuerto = idHuerto;
-        this.plantas = plantas;
+        this.planta_id = planta_id;
     }
 
     // Getters y setters huerto
@@ -24,11 +24,11 @@ public class Huerto {
         this.idHuerto = idHuerto;
     }
 
-    public ArrayList<Planta> getPlantas() {
-        return plantas;
+    public Integer getPlanta_id() {
+        return planta_id;
     }
 
     public void setPlantas(ArrayList<Planta> plantas) {
-        this.plantas = plantas;
+        this.planta_id = planta_id;
     }
 }
