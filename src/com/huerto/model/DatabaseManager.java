@@ -12,7 +12,7 @@ public class DatabaseManager {
     private static DatabaseManager instance;
     private Connection conexion;
 
-    private static final String url = "jdbc:sqlite";
+    private static final String url = "file:///C://Users//Sandra//IdeaProjects//huerto//BaseDeDatos//BaseDeDatosHuerto.db";
 
     /**
      * Constructor, crea la conexion con la BD
@@ -20,7 +20,7 @@ public class DatabaseManager {
     private DatabaseManager(){
         try{
             // Class.forName("org.sqlite.JDBC");
-            conexion = DriverManager.getConnection(url);
+            conexion = DriverManager.getConnection("jdbc:sqlite:" + url);
         }catch (SQLException e){
             e.getMessage();
         }

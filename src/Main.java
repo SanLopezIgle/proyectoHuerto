@@ -24,10 +24,10 @@ public class Main {
         //HuertoCatalogoIU vistaCatalago = new HuertoCatalogoIU();
         //vistaCatalago.setVisible(true);
         DatabaseManager modelo = DatabaseManager.getInstance();
-
+        modelo.getConnection();
         Consultas consulta = new Consultas();
 
-        HuertoCatalogoController controllerCatalogo = new HuertoCatalogoController(huertoCatalogoIU,consulta);
+        HuertoCatalogoController controllerCatalogo = new HuertoCatalogoController(huertoCatalogoIU,consulta, modelo);
 
     }
 }
