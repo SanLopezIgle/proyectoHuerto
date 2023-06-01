@@ -38,6 +38,7 @@ public class Consultas {
      * @return
      */
     public ArrayList<String[]> mostrarTablaHuertos(){
+        ArrayList<String[]> datosHuerto = new ArrayList<>();
         Connection conexion = databaseManager.getConnection();
         try{
             String consulta = "SELECT h.idHuerto, p.especie FROM huerto h INNER JOIN planta p ON h.planta_id = p.idPlanta";
@@ -58,7 +59,7 @@ public class Consultas {
         }finally {
             cerrarConexion();
         }
-        return null;
+        return datosHuerto;
     }
 
     /**
