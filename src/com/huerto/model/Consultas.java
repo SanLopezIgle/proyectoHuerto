@@ -36,29 +36,27 @@ public class Consultas {
     /**
      * @return
      */
-    public ArrayList<Huerto> mostrarTablaHuertos(){
-        ArrayList<Huerto> datosHuerto = new ArrayList<>();
+    public ArrayList<DatosHuertos> listaHuertos(){
         Connection conexion = databaseManager.getConnection();
+        ResultSet resultSet = null;
         try{
-            //String consulta = "SELECT h.idHuerto, p.especie FROM huerto h INNER JOIN planta p ON h.planta_id = p.idPlanta";
-            String consulta = "select idHuerto, planta_id from huerto";
+            String consulta = "select idHuerto, planta_id from tener";
             PreparedStatement st = conexion.prepareStatement(consulta);
-            ResultSet resultado = st.executeQuery();
+            resultSet = st.executeQuery();
 
-            while(resultado.next()){
-                Huerto huerto = new Huerto();
-                int idHuerto = resultado.getInt("idHuerto");
-                String especie = resultado.getString("especie");
-                datosHuerto.add(huerto);
+            while(resultSet.next()){
+                DatosHuertos datosHuertos = new DatosHuertos();
+                datosHuertos.setIdHuerto(resultSet.getInt("idHuerto"));
+                datosHuertos.setPlanta_id(resultSet.getInt("planta_id"));
+
+                listaHuertos().add(datosHuertos);
             }
-            resultado.close();
-            st.close();
         }catch (SQLException e){
             e.printStackTrace();
         }finally {
             cerrarConexion();
         }
-        return datosHuerto;
+        return listaHuertos();
     }
 
     /**
