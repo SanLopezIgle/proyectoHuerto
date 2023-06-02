@@ -24,6 +24,8 @@ public class Main {
         HuertoController controller = new HuertoController(huertoIU, huertoCatalogoIU, huertoPersonalizadoIU);
         huertoIU.setVisible(true);
 
+
+
         //HuertoCatalogoIU vistaCatalago = new HuertoCatalogoIU();
         //vistaCatalago.setVisible(true);
         // DatabaseManager modelo = DatabaseManager.getInstance();

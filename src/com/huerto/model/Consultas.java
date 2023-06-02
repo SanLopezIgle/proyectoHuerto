@@ -37,26 +37,26 @@ public class Consultas {
      * @return
      */
     public ArrayList<DatosHuertos> listaHuertos(){
+        ArrayList<DatosHuertos> lista = new ArrayList<>();
         Connection conexion = databaseManager.getConnection();
         ResultSet resultSet = null;
         try{
-            String consulta = "select idHuerto, planta_id from tener";
+            String consulta = "select planta_id, idHuerto from tener";
             PreparedStatement st = conexion.prepareStatement(consulta);
             resultSet = st.executeQuery();
 
             while(resultSet.next()){
                 DatosHuertos datosHuertos = new DatosHuertos();
-                datosHuertos.setIdHuerto(resultSet.getInt("idHuerto"));
                 datosHuertos.setPlanta_id(resultSet.getInt("planta_id"));
-
-                listaHuertos().add(datosHuertos);
+                datosHuertos.setIdHuerto(resultSet.getInt("idHuerto"));
+                lista.add(datosHuertos);
             }
         }catch (SQLException e){
             e.printStackTrace();
         }finally {
             cerrarConexion();
         }
-        return listaHuertos();
+        return lista;
     }
 
     /**
