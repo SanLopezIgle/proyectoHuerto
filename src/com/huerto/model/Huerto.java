@@ -27,8 +27,7 @@ public class Huerto {
     public Integer getPlanta_id() {
         return planta_id;
     }
-
-    public void setPlantas(ArrayList<Planta> plantas) {
+    public void setPlanta_id(Integer planta_id) {
         this.planta_id = planta_id;
     }
 }

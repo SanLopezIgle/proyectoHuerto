@@ -10,19 +10,23 @@ public class DatabaseManager {
 
     // Atributos
     private static DatabaseManager instance;
-    private Connection conexion;
+    Connection conexion;
 
-    private static final String url = "file:///C://Users//Sandra//IdeaProjects//huerto//BaseDeDatos//BaseDeDatos.db";
-
+    private static final String url = "file:///C://Users//Sandra//IdeaProjects//proyectoHuerto//basededatos//basededatos.db";
+    
     /**
      * Constructor, crea la conexion con la BD
      */
     private DatabaseManager(){
         try{
-            // Class.forName("org.sqlite.JDBC");
+            Class.forName("org.sqlite.JDBC");
             conexion = DriverManager.getConnection("jdbc:sqlite:" + url);
+            if(conexion != null) System.out.println("conectado");
+            
         }catch (SQLException e){
             e.getMessage();
+        }catch (ClassNotFoundException ex){
+            ex.getMessage();
         }
     }
 
@@ -47,10 +51,10 @@ public class DatabaseManager {
     /**
      * Método que cierra la conexión
      */
-    public void close(){
+    public void close() {
         try{
             conexion.close();
-        } catch (SQLException e){
+        }catch (SQLException e){
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, e);
         }
     }

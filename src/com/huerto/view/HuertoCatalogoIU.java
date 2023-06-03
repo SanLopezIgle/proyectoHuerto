@@ -4,17 +4,55 @@
  */
 package com.huerto.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import com.huerto.controller.*;
+import com.huerto.model.*;
+import com.huerto.view.*;
+
+import com.huerto.controller.*;
+import com.huerto.model.*;
+import com.huerto.view.*;
+
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author PC
  */
 public class HuertoCatalogoIU extends javax.swing.JFrame {
 
+
     /**
      * Creates new form HuertoCatalogoIU
      */
     public HuertoCatalogoIU() {
         initComponents();
+
+
+        bComprar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //mostrar msj lib
+            }
+        });
+
+        bSalir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        bAtras.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        
     }
 
     /**
@@ -183,4 +221,17 @@ public class HuertoCatalogoIU extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    public void cargarDatos() {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        Consultas consulta = new Consultas();
+        ArrayList<DatosHuerto> listaHuertos = consulta.listaHuertos();
+        modelo.setRowCount(0);
+        for (DatosHuerto elemento : listaHuertos) {
+            Object datos[] = new Object[2];
+            datos[0] = elemento.getPlanta_id();
+            datos[1] = elemento.getIdHuerto();
+            modelo.addRow(datos);
+        }
+    }
 }

@@ -17,7 +17,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import javax.swing.table.DefaultTableModel;
+
 public class HuertoCatalogoController {
+    /*
+}
     private HuertoCatalogoIU vista;
     private Consultas consulta;
     private Connection conexion;
@@ -26,11 +31,23 @@ public class HuertoCatalogoController {
     //private DatabaseManager modelo;
 
     public HuertoCatalogoController(HuertoCatalogoIU vista) {
+      
+
+    /*
+    private HuertoCatalogoIU vista;
+    private Consultas consulta;
+    private Connection conexion;
+    private DefaultTableModel modeloTabla;
+*/
+    //private DatabaseManager modelo;
+    /*
+    public HuertoCatalogoController(HuertoCatalogoIU vista) {
         this.vista = vista;
         this.conexion = (Connection) DatabaseManager.getInstance().getConnection();
         this.modeloTabla = (DefaultTableModel) vista.jTable1.getModel();
-        cargarTabla();
+        //cargarTabla();
     }
+    *
 
     /**
      * Método que muestra en la tabla de la interfaz los datos de los huertos
@@ -38,8 +55,10 @@ public class HuertoCatalogoController {
      */
 
 
+    HuertoCatalogoIU catalogo = new HuertoCatalogoIU();
+    Consultas consulta = new Consultas();
     public void cargarTabla(){
-        DefaultTableModel modelo = (DefaultTableModel) vista.jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) catalogo.jTable1.getModel();
         ArrayList<DatosHuerto> listaHuertos = consulta.listaHuertos();
         modelo.setRowCount(0);
         for(DatosHuerto elemento : listaHuertos){
@@ -50,7 +69,5 @@ public class HuertoCatalogoController {
             modelo.addRow(datos);
         }
     }
-
-
 
 }

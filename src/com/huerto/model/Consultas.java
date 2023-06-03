@@ -5,58 +5,53 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import com.huerto.view.*;
+
 public class Consultas {
     private DatabaseManager databaseManager;
+    ResultSet resultSet;
 
     public Consultas(){
         databaseManager = DatabaseManager.getInstance();
     }
 
-    /**
-     *
-     * @param dni
-     * @param nombre
-     */
-    public void insertarCliente(String dni, String nombre){
+    
+    public boolean insertarCliente(Cliente cliente){
         Connection conexion = databaseManager.getConnection();
         try{
-            String consulta = "INSERT INTO cliente (dni, nombre) VALUES (?,?)";
+            String consulta = "insert into cliente (dni, nombre) values (?,?)";
             PreparedStatement st = conexion.prepareStatement(consulta);
-            st.setString(1, dni);
-            st.setString(2, nombre);
-            st.executeUpdate();
-            st.close();
+            st.setString(1, cliente.getDni().toUpperCase());
+            st.setString(2, cliente.getNombre().toUpperCase());
+            st.execute();
+            return true;
         }catch (SQLException e){
-            e.printStackTrace();
+            System.err.println(e.getMessage());
+            return false;
         }finally {
             cerrarConexion();
         }
     }
-    /*
-    /**
-     * @return
-     */
+
     public ArrayList<DatosHuerto> listaHuertos(){
-        ArrayList<DatosHuerto> lista = new ArrayList<>();
         Connection conexion = databaseManager.getConnection();
-        ResultSet resultSet = null;
+        ArrayList<DatosHuerto> listaHuertos = new ArrayList<>();
         try{
-            String consulta = "select planta_id, idHuerto from tener";
+            String consulta = "select * from tener";
             PreparedStatement st = conexion.prepareStatement(consulta);
             resultSet = st.executeQuery();
-
             while(resultSet.next()){
-                DatosHuerto datosHuertos = new DatosHuerto();
-                datosHuertos.setPlanta_id(resultSet.getInt("planta_id"));
-                datosHuertos.setIdHuerto(resultSet.getInt("idHuerto"));
-                lista.add(datosHuertos);
+                DatosHuerto datos = new DatosHuerto();
+                datos.setPlanta_id(resultSet.getInt("idPlanta"));
+                datos.setIdHuerto(resultSet.getInt("idHuerto"));
+                listaHuertos.add(datos);
             }
         }catch (SQLException e){
-            e.printStackTrace();
+            e.getMessage();
         }finally {
             cerrarConexion();
         }
-        return lista;
+        return listaHuertos;
     }
 
     public void cerrarConexion(){

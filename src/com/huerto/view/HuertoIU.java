@@ -4,17 +4,76 @@
  */
 package com.huerto.view;
 
+import com.huerto.controller.HuertoCatalogoController;
+import com.huerto.controller.HuertoController;
+import com.huerto.model.Cliente;
+import com.huerto.model.Consultas;
+import com.huerto.model.DatabaseManager;
+import com.huerto.model.DatosHuerto;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+
 /**
  *
  * @author PC
  */
 public class HuertoIU extends javax.swing.JFrame {
 
+    DatosHuerto datos = new DatosHuerto();
+    Cliente cliente = new Cliente();
+
+    DatabaseManager db = DatabaseManager.getInstance();
+    Connection connection = db.getConnection();
+
+    Consultas consulta = new Consultas();
+
+    HuertoCatalogoController catalogoController = new HuertoCatalogoController();
+
     /**
      * Creates new form HuertoIU
      */
     public HuertoIU() {
         initComponents();
+
+        bHuertoCatalogo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HuertoCatalogoIU catalogoIU = new HuertoCatalogoIU();
+                catalogoIU.cargarDatos();
+                catalogoIU.setVisible(true);
+            }
+        });
+
+        bHuertoPersonalizado.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HuertoController.abrirPersonalizado();
+            }
+        });
+
+        bRegistrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == bRegistrar){
+                    try{
+                        cliente.setDni(txtDniCliente.getText());
+                        cliente.setNombre(txtNomCliente.getText());
+
+                        if(consulta.insertarCliente(cliente)){
+                            JOptionPane.showMessageDialog(null, "Guardado");
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "no se pudo guardar");
+                        }
+                    }catch (Exception exception){
+                        exception.getMessage();
+                    }
+                }
+            }
+        });
     }
 
     /**

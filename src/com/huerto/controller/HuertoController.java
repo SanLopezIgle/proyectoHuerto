@@ -1,12 +1,29 @@
 package com.huerto.controller;
 
-import com.huerto.view.HuertoCatalogoIU;
-import com.huerto.view.HuertoIU;
-import com.huerto.view.HuertoPersonalizadoIU;
-
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+
+import com.huerto.controller.*;
+import com.huerto.model.*;
+import com.huerto.view.*;
+
 
 public class HuertoController{
+    
+    public static void main(String[] args){
+        View.mostrarHuertoIU();
+    }
+    
+    public static void abrirCatalogo(){
+        View.mostrarHuertoCatalogoIU();
+    }
+    
+    public static void abrirPersonalizado(){
+        View.mostrarHuertoPersonalizadoIU();
+    }
+    
+    
+    /*
 
     private HuertoIU principal;
     private HuertoCatalogoIU catalogoIU;
@@ -21,20 +38,5 @@ public class HuertoController{
         principal.getbHuertoCatalogo().addActionListener(e -> abrirHuertoCatalogoUI());
         principal.getbHuertoPersonalizado().addActionListener(e -> abrirHuertoPersonalizadoUI());
     }
-
-    /**
-     * Metodo que abre la ventana de HuertoCatalagoUI
-     */
-    private void abrirHuertoCatalogoUI(){
-        catalogoIU.setVisible(true);
-        personalizadoIU.setVisible(false);
-    }
-
-    /**
-     * Metodo que abre la ventana de HuertoPersonalizadoUI
-     */
-    private void abrirHuertoPersonalizadoUI(){
-        personalizadoIU.setVisible(true);
-        catalogoIU.setVisible(false);
-    }
+*/
 }

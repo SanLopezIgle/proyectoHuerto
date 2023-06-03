@@ -4,6 +4,9 @@
  */
 package com.huerto.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author PC
@@ -15,6 +18,20 @@ public class HuertoPersonalizadoIU extends javax.swing.JFrame {
      */
     public HuertoPersonalizadoIU() {
         initComponents();
+
+        bComprar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //msj lib
+            }
+        });
+
+        bAtras.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
 
     /**
